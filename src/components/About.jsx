@@ -1,57 +1,53 @@
 import React from "react";
-import Tilt from "react-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
-import { services } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
-import Services from "./Services";
-
-const ServiceCard = ({ index, title, icon }) => (
-  <Tilt className='xs:w-[250px] w-full'>
-    <motion.div
-      variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-      className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
-    >
-      <div
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
-      >
-        <img
-          src={icon}
-          alt='web-development'
-          className='w-16 h-16 object-contain'
-        />
-
-        <h3 className='text-white text-[20px] font-bold text-center'>
-          {title}
-        </h3>
-      </div>
-    </motion.div>
-  </Tilt>
-);
 
 const About = () => {
   return (
-    <>
+    <section className="relative text-center max-w-5xl mx-auto">
+
+      {/* HEADER */}
       <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Introduction</p>
-        <h2 className={styles.sectionHeadText}>Overview.</h2>
+        <p className={`${styles.sectionSubText} tracking-[0.4em] uppercase text-cyan-400/70`}>
+          Introduction
+        </p>
+
+        <h2 className={`${styles.sectionHeadText} text-white font-light`}>
+          A different approach to innovation<span className="text-cyan-400">.</span>
+        </h2>
       </motion.div>
 
+      {/* BODY TEXT */}
       <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
+        variants={fadeIn("", "", 0.2, 1)}
+        className="mt-8 text-slate-400 text-[17px] leading-relaxed max-w-3xl mx-auto font-light"
       >
-Innovella KL isn't just another software provider; we are a dedicated transformation partner committed to redefining how your business operates. Our philosophy transcends the delivery of standard digital tools to focus on the heart of progress: continuous, meaningful improvement. We don't just solve isolated problems—we evolve your entire workflow to ensure long-term excellence. At Innovella KL, we believe true success isn't found in a finished product, but in the relentless pursuit of being better than yesterday.
+        Innovella KL is not simply a software provider — it is a transformation partner 
+        focused on redefining how modern systems operate. We move beyond isolated solutions, 
+        designing intelligent environments where technology, process, and space work in 
+        complete harmony.
       </motion.p>
 
-    </>
+      <motion.p
+        variants={fadeIn("", "", 0.4, 1)}
+        className="mt-6 text-slate-400 text-[17px] leading-relaxed max-w-3xl mx-auto font-light"
+      >
+        Our philosophy is grounded in continuous, measurable refinement. Every system we 
+        design is built to evolve — bringing clarity, control, and long-term performance 
+        without unnecessary complexity.
+      </motion.p>
+
+      <motion.p
+        variants={fadeIn("", "", 0.6, 1)}
+        className="mt-6 text-slate-300 text-[17px] leading-relaxed max-w-3xl mx-auto font-light"
+      >
+        Because true innovation is not noise — it is precision, calm, and mastery.
+      </motion.p>
+
+    </section>
   );
 };
 

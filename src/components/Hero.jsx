@@ -1,95 +1,89 @@
 import { motion } from "framer-motion";
 import { styles } from "../styles";
-import { ComputersCanvas } from "./canvas";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen mx-auto overflow-hidden">
-      {/* --- THE MOVING BACKGROUND LAYER --- */}
-      <div className="absolute inset-0 z-[-1] bg-[#050816]">
-        {/* 1. Abstract Moving Grid (Floor) */}
-        <div 
-          className="absolute inset-0 opacity-30"
-          style={{ perspective: "1000px" }}
+    <section className="relative w-full h-screen mx-auto overflow-hidden bg-[#0b0b0c] flex items-center justify-center">
+
+      {/* 🔵 BACKGROUND SYSTEM */}
+      <div className="absolute inset-0 z-0">
+        
+        {/* Primary Blue Glow */}
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-cyan-500/10 blur-[140px]" />
+
+        {/* Secondary Soft Glow */}
+        <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] rounded-full bg-slate-700/10 blur-[120px]" />
+
+        {/* Subtle animated breathing light */}
+        <motion.div
+          animate={{ opacity: [0.08, 0.18, 0.08] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 40%, rgba(34,211,238,0.15), transparent 70%)",
+            filter: "blur(100px)",
+          }}
+        />
+      </div>
+
+      {/* 🧠 CONTENT */}
+      <div className="relative z-10 text-center px-6 max-w-5xl">
+
+        {/* Heading */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className={`${styles.heroHeadText} text-white font-light tracking-wide`}
         >
-          <motion.div 
-            animate={{ 
-              backgroundPosition: ["0px 0px", "0px 50px"] 
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute inset-0 w-full h-full"
-            style={{
-              backgroundImage: `linear-gradient(to right, #915EFF 1px, transparent 1px), 
-                                linear-gradient(to bottom, #915EFF 1px, transparent 1px)`,
-              backgroundSize: '50px 50px',
-              transform: "rotateX(60deg) scale(2)",
-              transformOrigin: "top",
-              maskImage: "linear-gradient(to bottom, black, transparent)"
-            }}
-          />
-        </div>
+          Calm technology.
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-slate-300">
+            Engineered with precision.
+          </span>
+        </motion.h1>
 
-        {/* 2. Flowing Digital Lines (Vibe) */}
-        <div className="absolute inset-0">
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ y: "-100%", opacity: 0 }}
-              animate={{ y: "100%", opacity: [0, 0.3, 0] }}
-              transition={{
-                duration: Math.random() * 5 + 5,
-                repeat: Infinity,
-                delay: i * 2,
-                ease: "linear"
-              }}
-              className="absolute w-[1px] h-64 bg-gradient-to-b from-transparent via-[#915EFF] to-transparent"
-              style={{ left: `${Math.random() * 100}%` }}
-            />
-          ))}
-        </div>
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 1.2 }}
+          className="mt-6 text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto font-light"
+        >
+          Luxury innovation meets calm intelligence.
+          <br />
+          We design systems, software, and environments that bring clarity,
+          control, and measurable transformation.
+        </motion.p>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 1.2 }}
+          className="mt-12 flex justify-center gap-6 flex-wrap"
+        >
+          <a href="#contact" className="px-10 py-4 rounded-full bg-white text-black text-sm tracking-wide hover:bg-gray-200 transition">
+            Book Consultation
+          </a>
+
+          <a href="#services" className="px-10 py-4 rounded-full border border-white/20 text-white text-sm tracking-wide hover:border-cyan-400 hover:text-cyan-400 transition">
+            Explore Services
+          </a>
+        </motion.div>
       </div>
 
-      {/* --- CONTENT LAYER --- */}
-      <div
-        className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5 z-20 pointer-events-none`}
+      {/* ⬇ Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-10 flex flex-col items-center text-slate-500 text-xs tracking-widest"
       >
-        <div className='flex flex-col justify-center items-center mt-5'>
-          <div className='w-5 h-5 rounded-full bg-[#915EFF]' />
-          <div className='w-1 sm:h-80 h-40 violet-gradient' />
-        </div>
-
-        <div className="pointer-events-auto">
-          <h1 className={`${styles.heroHeadText} text-white`}>
-            We engineer <span className="text-[#915EFF]">measurable</span> improvement.
-          </h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100 max-w-2xl`}>
-            Transforming systems, software, and space through intelligent innovation.
-          </p>
-
-          {/* Modern CTA Buttons */}
-          <div className="mt-10 flex flex-wrap gap-5">
-            <button className="bg-[#915EFF] hover:bg-[#7c4dff] py-3 px-8 text-white font-bold rounded-xl shadow-[0_0_15px_rgba(145,94,255,0.4)] transition-all transform hover:scale-105 active:scale-95">
-              Book a Consultation
-            </button>
-            <button className="border-2 border-[#915EFF] py-3 px-8 text-white font-bold rounded-xl hover:bg-[#915EFF]/10 backdrop-blur-sm transition-all transform hover:scale-105">
-              Explore Our Services
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* --- 3D CANVAS LAYER --- */}
-      {/* Positioned between background and text */}
-      <div className="absolute inset-0 z-10">
-        <ComputersCanvas />
-      </div>
-
-      {/* Scroll Indicator */}
-      
+        <span>SCROLL</span>
+        <div className="w-[1px] h-10 bg-gradient-to-b from-slate-500 to-transparent mt-2" />
+      </motion.div>
     </section>
   );
 };

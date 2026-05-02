@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
-import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
+import { fadeIn, textVariant } from "../utils/motion";
 
 const Contact = () => {
   const formRef = useRef();
+
   const [form, setForm] = useState({
     name: "",
     company: "",
@@ -19,13 +19,8 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { target } = e;
-    const { name, value } = target;
-
-    setForm({
-      ...form,
-      [name]: value,
-    });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -49,7 +44,7 @@ const Contact = () => {
       .then(
         () => {
           setLoading(false);
-          alert("Thank you. We will get back to you as soon as possible.");
+          alert("Thank you. We will be in touch shortly.");
 
           setForm({
             name: "",
@@ -61,89 +56,97 @@ const Contact = () => {
         (error) => {
           setLoading(false);
           console.error(error);
-
-          alert("Ahh, something went wrong. Please try again.");
+          alert("Something went wrong. Please try again.");
         }
       );
   };
 
   return (
-    <div
-      className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
-    >
-      <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
-      >
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact.</h3>
+    <section className="relative bg-[#0b0b0c] py-24 overflow-hidden">
 
-        <form
+      {/* 🔵 Ambient background (subtle luxury feel) */}
+      <div className="absolute inset-0">
+        <div className="absolute w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full top-[-100px] left-[-100px]" />
+        <div className="absolute w-[400px] h-[400px] bg-slate-700/10 blur-[100px] rounded-full bottom-[-100px] right-[-100px]" />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto px-6">
+
+        {/* HEADER */}
+        <motion.div variants={textVariant()} className="text-center">
+          <p className={`${styles.sectionSubText} tracking-[0.4em] uppercase text-cyan-400/70`}>
+            Initiate
+          </p>
+
+          <h2 className={`${styles.sectionHeadText} text-white font-light`}>
+            Begin your transformation<span className="text-cyan-400">.</span>
+          </h2>
+        </motion.div>
+
+        {/* SUBTEXT */}
+        <motion.p
+          variants={fadeIn("", "", 0.2, 1)}
+          className="mt-6 text-slate-400 text-center max-w-2xl mx-auto font-light leading-relaxed"
+        >
+          Tell us about your vision. We will respond with clarity, precision, 
+          and a structured path forward.
+        </motion.p>
+
+        {/* FORM */}
+        <motion.form
           ref={formRef}
           onSubmit={handleSubmit}
-          className='mt-12 flex flex-col gap-8'
+          variants={fadeIn("up", "", 0.4, 1)}
+          className="mt-16 flex flex-col gap-6"
         >
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your Name</span>
-            <input
-              type='text'
-              name='name'
-              value={form.name}
-              onChange={handleChange}
-              placeholder="What's your good name?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>
-                   <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your Company</span>
-            <input
-              type='text'
-              name='company'
-              value={form.company}
-              onChange={handleChange}
-              placeholder="What's your company name?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>  
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your email</span>
-            <input
-              type='email'
-              name='email'
-              value={form.email}
-              onChange={handleChange}
-              placeholder="What's your web address?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Project Needs</span>
+          {/* Inputs */}
+          {[
+            { label: "Full Name", name: "name", type: "text", placeholder: "e.g. Alexander Sterling" },
+            { label: "Organization", name: "company", type: "text", placeholder: "e.g. Innovella Global" },
+            { label: "Email Address", name: "email", type: "email", placeholder: "e.g. alexander@sterling.com" },
+          ].map((field) => (
+            <label key={field.name} className="flex flex-col">
+              <span className="text-slate-400 text-xs tracking-[0.3em] uppercase mb-3">
+                {field.label}
+              </span>
+
+              <input
+                type={field.type}
+                name={field.name}
+                value={form[field.name]}
+                onChange={handleChange}
+                placeholder={field.placeholder}
+                className="bg-transparent border-b border-white/10 py-3 px-1 text-white placeholder:text-slate-600 outline-none focus:border-cyan-400 transition-all duration-300"
+              />
+            </label>
+          ))}
+
+          {/* Message */}
+          <label className="flex flex-col">
+            <span className="text-slate-400 text-xs tracking-[0.3em] uppercase mb-3">
+              Project Description
+            </span>
+
             <textarea
-              rows={7}
-              name='message'
+              rows={4}
+              name="message"
               value={form.message}
               onChange={handleChange}
-              placeholder='what project you needs?'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              placeholder="Outline your requirements and objectives."
+              className="bg-transparent border-b border-white/10 py-3 px-1 text-white placeholder:text-slate-600 outline-none focus:border-cyan-400 transition-all duration-300 resize-none"
             />
           </label>
 
+          {/* CTA */}
           <button
-            type='submit'
-            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
+            type="submit"
+            className="mt-8 self-center px-12 py-4 rounded-full border border-white/20 text-white text-sm tracking-wide hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300"
           >
-            {loading ? "Sending..." : "Send"}
+            {loading ? "Processing..." : "Submit Inquiry"}
           </button>
-        </form>
-      </motion.div>
-
-      <motion.div
-        variants={slideIn("right", "tween", 0.2, 1)}
-        className='xl:flex-1 xl:h-[800px] md:h-[500px] h-[300px]'
-      >
-        <EarthCanvas />
-      </motion.div>
-    </div>
+        </motion.form>
+      </div>
+    </section>
   );
 };
 

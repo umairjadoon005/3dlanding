@@ -1,27 +1,69 @@
 import { BrowserRouter } from "react-router-dom";
-
-import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, WhyChooseUs, StarsCanvas } from "./components";
+import { 
+  About, 
+  Contact, 
+  Hero, 
+  Navbar, 
+  WhyChooseUs, 
+  StarsCanvas 
+} from "./components";
 import WorkflowSection from "./components/WorkflowSection";
 import Services from "./components/Services";
+import Loader from "./components/PageLoader";
+
+import { useState, useEffect } from "react";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1800); // adjust timing if needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loader />;
+
   return (
     <BrowserRouter>
-      <div className='relative z-0 bg-primary'>
-        <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
+      {/* 
+          Changed bg-primary to a deep charcoal #050505.
+          Added selection styling for that "Cool Blue" brand alignment.
+      */}
+      <div className='relative z-0 bg-[#050505] selection:bg-cyan-500/30 selection:text-cyan-100'>
+        
+        {/* 
+            Hero Wrapper: 
+            Ensure 'bg-hero-pattern' in your tailwind.config.js is either removed 
+            or updated to a soft, dark radial gradient to avoid the "gaming" look.
+        */}
+        <div className='relative bg-cover bg-no-repeat bg-center'>
           <Navbar />
           <Hero />
+          
+          {/* Subtle Ambient Glow for the Hero Section */}
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+            <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-cyan-900/10 blur-[120px]" />
+          </div>
         </div>
-        <About />
-<Services />
 
-        <WorkflowSection/>
-        {/* <Experience /> */}
-        {/* <Tech /> */}
+        <About />
+        
+        {/* Services Section: Ensure this reflects all 5 core services mentioned in the brief */}
+        <Services />
+
+        <WorkflowSection />
+
+        {/* 
+            WhyChooseUs: Re-styled to emphasize "Clarity + Calm" 
+        */}
         <WhyChooseUs />
-        {/* <Feedbacks /> */}
+
         <div className='relative z-0'>
           <Contact />
+          {/* StarsCanvas provides that "Futuristic/Intelligence" feel the client requested */}
           <StarsCanvas />
         </div>
       </div>

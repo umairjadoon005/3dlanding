@@ -1,8 +1,4 @@
 import {
-  mobile,
-  backend,
-  creator,
-  web,
   javascript,
   typescript,
   html,
@@ -19,10 +15,12 @@ import {
   starbucks,
   tesla,
   shopify,
-  carrent,
-  jobit,
-  tripguide,
   threejs,
+  efficiency,
+  ai,
+  td,
+  bespoke,
+  spatial,
 } from "../assets";
 
 export const navLinks = [
@@ -47,24 +45,24 @@ export const navLinks = [
 const services = [
   {
     title: "Efficiency Systems",
-    icon: web,
+    icon: efficiency,
   },
   {
     title: "AI Software Solutions",
-    icon: mobile,
+    icon: ai,
   },
   {
     title: "Bespoke Software Development",
-    icon: backend,
+    icon: bespoke,
   },
   {
     title: "3D Visualization & VR",
-    icon: creator,
+    icon: td,
   },
-  // {
-  //   title: "Spatial Optimization",
-  //   icon: creator,
-  // },
+  {
+    title: "Spatial Optimization",
+    icon: spatial,
+  },
 ];
 
 const technologies = [
@@ -223,7 +221,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
+    image: ai,
     source_code_link: "https://github.com/",
   },
   {
@@ -244,7 +242,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
+    image: ai,
     source_code_link: "https://github.com/",
   },
   {
@@ -265,7 +263,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
+    image: ai,
     source_code_link: "https://github.com/",
   },
 ];
