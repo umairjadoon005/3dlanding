@@ -75,7 +75,7 @@ const Hero = () => {
       </div>
 
       {/* ⬇ Scroll Indicator */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
@@ -83,7 +83,7 @@ const Hero = () => {
       >
         <span>SCROLL</span>
         <div className="w-[1px] h-10 bg-gradient-to-b from-slate-500 to-transparent mt-2" />
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 };
