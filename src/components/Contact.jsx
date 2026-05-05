@@ -112,7 +112,7 @@ const Contact = () => {
 
               <input
                 type={field.type}
-                name={field.name}
+                name={field.name}//
                 value={form[field.name]}
                 onChange={handleChange}
                 placeholder={field.placeholder}
