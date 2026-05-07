@@ -62,31 +62,41 @@ const WorkflowSection = () => {
         {/* STEPS */}
         <div className="mt-20 grid md:grid-cols-4 gap-10">
 
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              variants={fadeIn("up", "tween", index * 0.15, 0.8)}
-              className="text-center group"
-            >
-              {/* ICON */}
-              <div className="mx-auto w-14 h-14 flex items-center justify-center rounded-full border border-white/10 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-400/40 transition duration-500">
-                {step.icon}
-              </div>
+      {steps.map((step, index) => (
+  <motion.div
+    key={index}
+    variants={fadeIn("up", "tween", index * 0.18, 1)}
+    whileHover={{ y: -6 }}
+    transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
+    className="relative text-center group px-4 py-8 rounded-[28px] border border-white/10 bg-[#0b0b0c] overflow-hidden hover:border-cyan-400/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-1000"
+  >
+    {/* AMBIENT INTERNAL GLOW */}
+    <div className="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/[0.02] transition-colors duration-1000 pointer-events-none" />
 
-              {/* TITLE */}
-              <h4 className="mt-6 text-white text-[15px] tracking-[0.2em] uppercase font-light">
-                {step.title}
-              </h4>
+    {/* ICON - Synced with button styling */}
+    <div className="relative z-10 mx-auto w-16 h-16 flex items-center justify-center rounded-full border border-white/5 bg-white/[0.02] text-slate-400 group-hover:text-cyan-300 group-hover:border-cyan-400/30 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all duration-1000">
+      <div className="opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
+        {step.icon}
+      </div>
+    </div>
 
-              {/* LINE */}
-              <div className="mx-auto mt-3 w-6 h-[1px] bg-slate-700 group-hover:w-10 group-hover:bg-cyan-400 transition-all duration-500" />
+    {/* TITLE - Matched to the wide tracking of the button */}
+    <h4 className="relative z-10 mt-7 text-white text-[13px] tracking-[0.25em] uppercase font-light opacity-80 group-hover:opacity-100 transition-all duration-1000">
+      {step.title}
+    </h4>
 
-              {/* DESCRIPTION */}
-              <p className="mt-4 text-slate-400 text-sm leading-relaxed font-light px-2">
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
+    {/* CENTER DIVIDER LINE */}
+    <div className="relative z-10 mx-auto mt-4 w-6 h-[1px] bg-white/10 group-hover:w-12 group-hover:bg-cyan-400/60 transition-all duration-1000" />
+
+    {/* DESCRIPTION */}
+    <p className="relative z-10 mt-5 text-slate-400 text-[14px] leading-[1.8] font-light px-2 opacity-90">
+      {step.description}
+    </p>
+
+    {/* BOTTOM ACCENT LINE */}
+    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-1/3 h-[1px] bg-cyan-400/50 transition-all duration-1000" />
+  </motion.div>
+))}
 
         </div>
       </div>

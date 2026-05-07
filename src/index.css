@@ -12,7 +12,16 @@
   scroll-behavior: smooth;
   color-scheme: dark;
 }
+/* Custom Button Glow Effect */
+.blue-glow {
+  transition: all 0.3s ease-in-out;
+}
 
+.blue-glow:hover {
+  background-color: #2f80ed; /* Matching your blue-text-gradient start color */
+  box-shadow: 0 0 15px 5px rgba(47, 128, 237, 0.4);
+  transform: translateY(-2px); /* Subtle lift for a premium feel */
+}
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;

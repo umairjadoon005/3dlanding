@@ -160,16 +160,17 @@ const Contact = () => {
             viewport={{ once: true }}
             className="flex justify-center mt-6"
           >
-            <button
-              type="submit"
-              className="relative group px-20 py-5 rounded-full bg-white text-black text-[12px] tracking-[0.3em] uppercase font-bold overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.4)] active:scale-95"
-            >
-              <span className="relative z-10">
-                {loading ? "SENDING..." : "SUBMIT INQUIRY"}
-              </span>
-              {/* Subtle hover overlay */}
-              <div className="absolute inset-0 bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-            </button>
+           <button
+  type="submit"
+  className="group relative px-12 py-5 rounded-full bg-white text-black text-xs tracking-[0.2em] font-semibold overflow-hidden transition-all duration-1000 active:scale-95"
+>
+  <span className="relative z-10">
+    {loading ? "SENDING..." : "SUBMIT INQUIRY"}
+  </span>
+  <div 
+    className="absolute inset-0 bg-cyan-100 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-[800ms] ease-[0.19, 1, 0.22, 1]" 
+  />
+</button>
           </motion.div>
         </form>
       </div>

@@ -52,36 +52,48 @@ const outcomes = [
 const OutcomeCard = ({ index, name, description, icon, tag, color }) => {
   return (
     <motion.div
-      variants={fadeIn("up", "tween", index * 0.15, 0.8)}
-      className="w-full sm:w-[280px] group"
+      variants={fadeIn("up", "tween", index * 0.18, 1)}
+      whileHover={{ y: -8 }}
+      transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }} // Synced duration
+      className="w-full sm:w-[300px] group"
     >
-      <div className="relative p-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent hover:from-cyan-400/40 transition-all duration-700">
-        <div className="relative bg-[#0b0b0c] rounded-2xl p-8 min-h-[260px] flex flex-col justify-between">
+      {/* OUTER CONTAINER - Handling the dynamic border glow */}
+      <div className="relative p-[1px] rounded-[30px] bg-white/10 group-hover:bg-cyan-400/60 transition-all duration-1000 overflow-hidden group-hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]">
 
-          {/* subtle glow */}
-          <div className="absolute w-[100px] h-[100px] bg-cyan-400/5 blur-[60px] top-[-20px] right-[-20px] opacity-0 group-hover:opacity-100 transition duration-700" />
+        {/* MAIN CARD BODY */}
+        <div className="relative bg-[#0b0b0c] backdrop-blur-xl rounded-[30px] p-8 min-h-[290px] flex flex-col justify-between border border-transparent">
+          
+          {/* Ambient Background Glow */}
+          <div className="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/[0.02] transition-colors duration-1000" />
 
-          <div>
-            <div className="mb-6 p-3 rounded-xl border border-white/5 bg-white/5 group-hover:border-cyan-400/30 transition duration-500 w-fit">
-              {icon}
+          <div className="relative z-10">
+            {/* ICON - Synced with button-style hover */}
+            <div className="mb-7 p-4 rounded-2xl border border-white/5 bg-white/[0.03] group-hover:border-cyan-400/30 group-hover:bg-cyan-400/[0.05] transition-all duration-1000 w-fit">
+              <div className="opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
+                {icon}
+              </div>
             </div>
 
-            <h3 className="text-white text-[18px] font-light tracking-wide">
+            {/* TITLE */}
+            <h3 className="text-white text-[20px] font-extralight tracking-[0.03em] leading-snug">
               {name}
             </h3>
 
-            <p className="mt-3 text-slate-400 text-[14px] leading-relaxed font-light">
+            {/* DESCRIPTION */}
+            <p className="mt-4 text-slate-400 text-[15px] leading-[1.9] font-light">
               {description}
             </p>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-white/5">
-            <p
-              className={`text-[10px] tracking-[0.3em] uppercase ${color} opacity-70`}
-            >
+          {/* FOOTER */}
+          <div className="relative z-10 mt-8 pt-5 border-t border-white/[0.05]">
+            <p className={`text-[10px] tracking-[0.35em] uppercase ${color} opacity-60 group-hover:opacity-100 transition-all duration-1000 font-light`}>
               {tag}
             </p>
           </div>
+
+          {/* BOTTOM GLOW LINE - Exact match to the "Explore" style */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-1/3 h-[1px] bg-cyan-400/50 transition-all duration-1000" />
         </div>
       </div>
     </motion.div>
